@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blogs - DevBoard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 p-6">
+
+    <!-- Navbar -->
+    <nav class="flex justify-between items-center p-4 bg-white shadow-md rounded-lg">
+        <div class="text-xl font-bold flex items-center gap-2">
+            <img src="assets/logo.png" class="w-8" alt="Logo">
+            <span class="text-black">Dev</span><span class="font-bold">Board</span>
+        </div>
+        <button id="backToDesk" class="bg-blue-700 text-white px-4 py-2 rounded-md font-bold">Back to Desk</button>
+    </nav>
+
+    <!-- Blog Section -->
+   
+        <h2 class="text-center text-2xl font-bold mt-5">Blogs</h2>
+  
+
+    <!-- Blog Content -->
+    <div class="mt-6 space-y-4">
+        <div class="p-6 bg-white shadow-md rounded-md">
+            <h3 class="font-semibold">Question-1: What are the different ways to select an element in the DOM?</h3>
+            <p class="text-gray-600">Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora tenetur illum illo hic, ipsum officia obcaecati culpa vel pariatur repellendus quibusdam.</p>
+        </div>
+
+        <div class="p-6 bg-white shadow-md rounded-md">
+            <h3 class="font-semibold">Question-2: What is the difference between innerHTML, innerText, and textContent?</h3>
+            <p class="text-gray-600">Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora tenetur illum illo hic, ipsum officia obcaecati culpa vel pariatur repellendus quibusdam.</p>
+        </div>
+
+        <div class="p-6 bg-white shadow-md rounded-md">
+            <h3 class="font-semibold">Question-3: What is event delegation in the DOM?</h3>
+            <p class="text-gray-600">Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora tenetur illum illo hic, ipsum officia obcaecati culpa vel pariatur repellendus quibusdam.</p>
+        </div>
+        <div class="p-6 bg-white shadow-md rounded-md">
+            <h3 class="font-semibold">Question-4: What is event bubbling in the DOM?</h3>
+            <p class="text-gray-600">Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora tenetur illum illo hic, ipsum officia obcaecati culpa vel pariatur repellendus quibusdam.</p>
+        </div>
+        <div class="p-6 bg-white shadow-md rounded-md">
+            <h3 class="font-semibold">Question-5: How do you create, add, and remove elements using JavaScript?
+
+            </h3>
+            <p class="text-gray-600">Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora tenetur illum illo hic, ipsum officia obcaecati culpa vel pariatur repellendus quibusdam.</p>
+        </div>
+    </div>
+
+    <!-- JavaScript for Back to Desk Button -->
+    <script>
+        document.getElementById('backToDesk').addEventListener('click', function() {
+            window.location.href = 'index.html'; // Redirect back to main page
+        });
+    </script>
+
+</body>
+</html>
