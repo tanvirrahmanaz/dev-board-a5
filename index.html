@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevBoard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- <script>
+        tailwind.config = {
+            theme: {
+                extend: {},
+            },
+            plugins: [daisyui],
+        };
+    </script> -->
+</head>
+<body class="bg-gray-100">
+    <nav class="flex justify-between items-center p-4 bg-white shadow-md">
+        <div class="text-xl font-bold flex items-center gap-2">
+            <img src="assets/logo.png" id="themeToggle" class="w-8 cursor-pointer" alt="Logo"> Dev<span class="text-black">Board</span>
+        </div>
+        <div class="flex items-center gap-4">
+            <div class="flex items-center gap-2">
+                <img src="assets/checkbox.png" class="w-6" alt="Check"> <span id="taskCount" class="text-lg font-semibold">23</span>
+            </div>
+            <img src="assets/theme-btn.png" id="backgroundToggle" class="w-8 cursor-pointer" alt="Toggle Background">
+        </div>
+    </nav>
+    <main class="p-6">
+        <div class="grid grid-cols-3 gap-6">
+            <div class="p-4 bg-white shadow-md rounded-lg">
+                <h2 class="text-lg font-semibold">Task Assigned <span id="taskAssigned">5</span></h2>
+            </div>
+            <button id="discover" class="p-4 bg-blue-500 text-white rounded-lg flex items-center gap-2">
+                <img src="board.png" class="w-6"> Discover Something New Today!
+            </button>
+            <div class="p-4 bg-white shadow-md rounded-lg">
+                <h2 class="text-lg font-semibold">Activity Log</h2>
+                <button id="clearHistory" class="text-sm text-blue-500">Clear History</button>
+                <div id="activityLog" class="mt-2 text-sm"></div>
+            </div>
+        </div>
+        <div class="grid grid-cols-3 gap-6 mt-6">
+            <div class="p-4 bg-white shadow-md rounded-lg">
+                <h3 class="font-semibold">Fix Mobile Button Issue</h3>
+                <p class="text-sm">Debug using Chrome DevTools...</p>
+                <button class="complete-btn bg-blue-500 text-white p-2 mt-2 rounded">Complete</button>
+            </div>
+        </div>
+    </main>
+    <script>
+        document.getElementById('themeToggle').addEventListener('click', function() {
+            document.body.classList.toggle('bg-gray-800');
+            document.body.classList.toggle('text-white');
+        });
+        
+        document.querySelectorAll('.complete-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                alert('Task Completed!');
+                let count = parseInt(document.getElementById('taskCount').innerText);
+                document.getElementById('taskCount').innerText = count + 1;
+                document.getElementById('taskAssigned').innerText = parseInt(document.getElementById('taskAssigned').innerText) - 1;
+                document.getElementById('activityLog').innerHTML += `<p>You completed a task at ${new Date().toLocaleTimeString()}</p>`;
+            });
+        });
+        
+        document.getElementById('discover').addEventListener('click', function() {
+            window.location.href = 'newpage.html';
+        });
+
+    </script>
+
+
+    <script src="javascript/backgroundtoggle.js"></script>r
+</body>
+</html>
