@@ -14,60 +14,105 @@
         };
     </script> -->
 </head>
-<body class="bg-gray-100">
-    <nav class="flex justify-between items-center p-4 bg-white shadow-md">
+<body class="bg-gray-100 mx-9 my-6">
+    <nav class="flex justify-between items-center p-4 bg-white shadow-md rounded-lg">
         <div class="text-xl font-bold flex items-center gap-2">
             <img src="assets/logo.png" id="themeToggle" class="w-8 cursor-pointer" alt="Logo"> Dev<span class="text-black">Board</span>
         </div>
-        <div class="flex items-center gap-4">
-            <div class="flex items-center gap-2">
+        <div class="flex items-center  gap-4">
+            <div class="flex items-center gap-2 bg-gray-200 px-5 py-2 rounded-md">
                 <img src="assets/checkbox.png" class="w-6" alt="Check"> <span id="taskCount" class="text-lg font-semibold">23</span>
             </div>
             <img src="assets/theme-btn.png" id="backgroundToggle" class="w-8 cursor-pointer" alt="Toggle Background">
         </div>
     </nav>
-    <main class="p-6">
-        <div class="grid grid-cols-3 gap-6">
-            <div class="p-4 bg-white shadow-md rounded-lg">
-                <h2 class="text-lg font-semibold">Task Assigned <span id="taskAssigned">5</span></h2>
-            </div>
-            <button id="discover" class="p-4 bg-blue-500 text-white rounded-lg flex items-center gap-2">
-                <img src="board.png" class="w-6"> Discover Something New Today!
-            </button>
-            <div class="p-4 bg-white shadow-md rounded-lg">
-                <h2 class="text-lg font-semibold">Activity Log</h2>
-                <button id="clearHistory" class="text-sm text-blue-500">Clear History</button>
-                <div id="activityLog" class="mt-2 text-sm"></div>
-            </div>
+    <main class="mt-6 grid grid-cols-4 gap-6">
+        <!-- Task Assigned -->
+        <div class="p-6 bg-white shadow-md rounded-md flex flex-col items-center">
+            <p class="text-lg font-semibold">Task Assigned</p>
+            <span class="text-3xl font-bold text-blue-600" id="taskAssigned">6</span>
         </div>
-        <div class="grid grid-cols-3 gap-6 mt-6">
-            <div class="p-4 bg-white shadow-md rounded-lg">
-                <h3 class="font-semibold">Fix Mobile Button Issue</h3>
-                <p class="text-sm">Debug using Chrome DevTools...</p>
-                <button class="complete-btn bg-blue-500 text-white p-2 mt-2 rounded">Complete</button>
-            </div>
+
+        <!-- Discover Something New -->
+        <button id="discover" class="p-6 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-md text-center font-semibold flex items-center gap-2 justify-center">
+            <img src="assets/board.png" class="w-6"> Discover Something New Today!
+        </button>
+
+        <!-- Live Clock -->
+        <div class="p-6 bg-white shadow-md rounded-md text-center">
+            <p class="text-lg font-semibold">Live Time</p>
+            <span id="liveClock" class="text-2xl font-bold text-gray-800"></span>
+        </div>
+
+        <!-- Activity Log -->
+        <div class="p-6 bg-white shadow-md rounded-md">
+            <h2 class="text-lg font-semibold">Activity Log</h2>
+            <button id="clearHistory" class="text-sm text-blue-500 mt-2">Clear History</button>
+            <div id="activityLog" class="mt-2 text-sm p-2 bg-gray-100 rounded-md"></div>
         </div>
     </main>
+
+    <!-- Task Cards -->
+    <div class="grid grid-cols-3 gap-6 mt-6">
+        <div class="p-6 bg-white shadow-md rounded-md">
+            <h3 class="font-semibold task-title">Fix Mobile Button Issue</h3>
+            <p class="text-sm text-gray-600">Debug using Chrome DevTools...</p>
+            <button class="complete-btn bg-blue-500 text-white p-2 mt-2 rounded w-full">Complete</button>
+        </div>
+
+        <div class="p-6 bg-white shadow-md rounded-md">
+            <h3 class="font-semibold task-title">Add Dark Mode</h3>
+            <p class="text-sm text-gray-600">Store user preference in localStorage...</p>
+            <button class="complete-btn bg-blue-500 text-white p-2 mt-2 rounded w-full">Complete</button>
+        </div>
+
+        <div class="p-6 bg-white shadow-md rounded-md">
+            <h3 class="font-semibold task-title">Optimize Home Page</h3>
+            <p class="text-sm text-gray-600">Check layout issues...</p>
+            <button class="complete-btn bg-blue-500 text-white p-2 mt-2 rounded w-full">Complete</button>
+        </div>
+    </div>
     <script>
-        document.getElementById('themeToggle').addEventListener('click', function() {
-            document.body.classList.toggle('bg-gray-800');
-            document.body.classList.toggle('text-white');
+        // Live Clock Function
+        function updateClock() {
+            const now = new Date();
+            document.getElementById('liveClock').innerText = now.toLocaleTimeString();
+        }
+        setInterval(updateClock, 1000);
+        updateClock(); // Initial call
+
+        // Background Color Toggle
+        document.getElementById('backgroundToggle').addEventListener('click', function() {
+            const colors = ['#2A3B69', '#34B78F', '#FF6B4A', '#F5F7FA', '#F8C471', '#5DADE2', '#D7BDE2'];
+            document.body.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
         });
-        
+
+        // Task Completion Functionality
         document.querySelectorAll('.complete-btn').forEach(btn => {
             btn.addEventListener('click', function() {
-                alert('Task Completed!');
+                const taskTitle = this.parentElement.querySelector('.task-title').innerText;
+                alert(`Task Completed: ${taskTitle}`);
+
                 let count = parseInt(document.getElementById('taskCount').innerText);
-                document.getElementById('taskCount').innerText = count + 1;
-                document.getElementById('taskAssigned').innerText = parseInt(document.getElementById('taskAssigned').innerText) - 1;
-                document.getElementById('activityLog').innerHTML += `<p>You completed a task at ${new Date().toLocaleTimeString()}</p>`;
+                if (count > 0) {
+                    document.getElementById('taskCount').innerText = count - 1;
+                    document.getElementById('taskAssigned').innerText = count - 1;
+                }
+
+                const logEntry = `<p class="p-2 bg-gray-200 rounded-md my-1">You have completed '${taskTitle}' at ${new Date().toLocaleTimeString()}</p>`;
+                document.getElementById('activityLog').innerHTML += logEntry;
             });
         });
-        
+
+        // Discover Button Click
         document.getElementById('discover').addEventListener('click', function() {
             window.location.href = 'newpage.html';
         });
 
+        // Clear Activity Log
+        document.getElementById('clearHistory').addEventListener('click', function() {
+            document.getElementById('activityLog').innerHTML = '';
+        });
     </script>
 
 
